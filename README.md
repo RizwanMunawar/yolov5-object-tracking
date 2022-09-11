@@ -99,5 +99,7 @@ python -m streamlit run app.py
 - https://medium.com/augmented-startups/yolor-or-yolov5-which-one-is-better-2f844d35e1a1
 - https://medium.com/augmented-startups/train-yolor-on-custom-data-f129391bd3d6
 - https://medium.com/augmented-startups/develop-an-analytics-dashboard-using-streamlit-e6282fa5e0f
+- https://medium.com/augmented-startups/jetson-nano-is-rapidly-involving-in-computer-vision-solutions-5f588cb7c0db
+- https://chr043416.medium.com/how-can-computer-vision-products-help-in-warehouses-aa1dd95ec79c
 
 For more details, you can reach out to me on [Medium](https://chr043416.medium.com/) or can connect with me on [LinkedIn](https://www.linkedin.com/in/muhammadrizwanmunawar/)
