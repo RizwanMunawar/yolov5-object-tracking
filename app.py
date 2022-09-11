@@ -8,27 +8,25 @@ hide_menu_style = """
         
         
          div[data-testid="stHorizontalBlock"]> div:nth-child(1)
-        {   
-            background: #B983FF;
+        {  
             border : 2px solid #doe0db;
             border-radius:5px;
             text-align:center;
             color:black;
             font-weight:bold;
             padding: 25px;
-            # box-shadow: -0.7rem 0px 2rem 2rem rgba(10,10,10,0.16);  
+            
         }
         
         div[data-testid="stHorizontalBlock"]> div:nth-child(2)
         {   
-            background: #94B3FD;
             border : 2px solid #doe0db;
             border-radius:5px;
             text-align:center;
             font-weight:bold;
             color:black;
             padding: 25px;
-            # box-shadow: -0.4rem 0px 2rem 2rem rgba(6,6,6,0.10);  
+            
         }
     </style>
     """
