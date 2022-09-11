@@ -97,7 +97,7 @@ def main():
                                         type=["mp4", "avi"], 
                                         accept_multiple_files=False)
         
-        if st.sidebar.button("Start Detection"):
+        if st.sidebar.button("Start Tracking"):
             
             stframe = st.empty()
             
