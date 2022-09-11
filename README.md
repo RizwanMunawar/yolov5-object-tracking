@@ -68,7 +68,36 @@ python obj_det_and_trk.py --weights yolov5s.pt --source "your video.mp4" --class
 
 ### Streamlit Dashboard
 - If you want to run detection on streamlit app (Dashboard), you can use mentioned command below.
+
+<b>Note:</b> Make sure, to add video in the <b>yolov5-object-tracking</b> folder, that you want to run on streamlit dashboard. Otherwise streamlit server will through an error.
 ```
 python -m streamlit run app.py
 ```
 
+<table>
+  <tr>
+    <td>YOLOv5 Object Detection</td>
+    <td>YOLOv5 Object Tracking</td>
+    <td>YOLOv5 Object Tracking + Object Blurring</td>
+    <td>YOLOv5 Streamlit Dashboard</td>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/62513924/189525324-9aaf4b60-9336-41c3-8a27-8722bb7da731.png"></td>
+     <td><img src="https://user-images.githubusercontent.com/62513924/189525332-1e84b4d5-ae4e-4c1b-9498-0ec1d4ad4bd7.png"></td>
+     <td><img src="https://user-images.githubusercontent.com/62513924/189525328-f85ef474-e964-4d79-8f75-78ad4e5397d4.png"></td>
+     <td><img src="https://user-images.githubusercontent.com/62513924/189525342-8d4d81f4-5e3a-45aa-9972-5f5de1c72159.png"></td>
+  </tr>
+ </table>
+
+### References
+ - https://github.com/ultralytics/yolov5
+ - https://github.com/abewley/sort
+ 
+### My Medium Articles
+- https://medium.com/augmented-startups/yolov7-training-on-custom-data-b86d23e6623
+- https://medium.com/augmented-startups/roadmap-for-computer-vision-engineer-45167b94518c
+- https://medium.com/augmented-startups/yolor-or-yolov5-which-one-is-better-2f844d35e1a1
+- https://medium.com/augmented-startups/train-yolor-on-custom-data-f129391bd3d6
+- https://medium.com/augmented-startups/develop-an-analytics-dashboard-using-streamlit-e6282fa5e0f
+
+For more details, you can reach out to me on [Medium](https://chr043416.medium.com/) or can connect with me on [LinkedIn](https://www.linkedin.com/in/muhammadrizwanmunawar/)
