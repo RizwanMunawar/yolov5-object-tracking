@@ -9,6 +9,8 @@
 
 ### Coming Soon
 - Option to crop and save detected objects
+- Dashboard design enhancement
+
 
 ### Steps to run Code
 - Clone the repository
