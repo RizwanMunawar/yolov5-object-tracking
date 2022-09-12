@@ -28,9 +28,19 @@ ROOT = Path(os.path.relpath(ROOT, Path.cwd()))
 import skimage
 from sort import *
 
+
 #-----------Object Blurring-------------------
 blurratio = 40
-#............................... Tracker Functions ............................
+
+
+#.................. Tracker Functions .................
+'''Computer Color for every box and track'''
+palette = (2 ** 11 - 1, 2 ** 15 - 1, 2 ** 20 - 1)
+def compute_color_for_labels(label):
+    color = [int(int(p * (label ** 2 - label + 1)) % 255) for p in palette]
+    return tuple(color)
+
+
 """" Calculates the relative bounding box from absolute pixel values. """
 def bbox_rel(*xyxy):
     bbox_left = min([xyxy[0].item(), xyxy[2].item()])
@@ -45,7 +55,8 @@ def bbox_rel(*xyxy):
 
 
 """Function to Draw Bounding boxes"""
-def draw_boxes(img, bbox, identities=None, categories=None, names=None, offset=(0, 0)):
+def draw_boxes(img, bbox, identities=None, categories=None, 
+                names=None, color_box=None,offset=(0, 0)):
     for i, box in enumerate(bbox):
         x1, y1, x2, y2 = [int(i) for i in box]
         x1 += offset[0]
@@ -56,11 +67,22 @@ def draw_boxes(img, bbox, identities=None, categories=None, names=None, offset=(
         id = int(identities[i]) if identities is not None else 0
         data = (int((box[0]+box[2])/2),(int((box[1]+box[3])/2)))
         label = str(id)
-        (w, h), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 1)
-        cv2.rectangle(img, (x1, y1), (x2, y2), (255,191,0), 2)
-        cv2.rectangle(img, (x1, y1 - 20), (x1 + w, y1), (255,191,0), -1)
-        cv2.putText(img, label, (x1, y1 - 5),cv2.FONT_HERSHEY_SIMPLEX, 0.6, [255, 255, 255], 1)
-        cv2.circle(img, data, 3, (255,191,0),-1)
+
+        if color_box:
+            color = compute_color_for_labels(id)
+            (w, h), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 1)
+            cv2.rectangle(img, (x1, y1), (x2, y2),color, 2)
+            cv2.rectangle(img, (x1, y1 - 20), (x1 + w, y1), (255,191,0), -1)
+            cv2.putText(img, label, (x1, y1 - 5),cv2.FONT_HERSHEY_SIMPLEX, 0.6, 
+            [255, 255, 255], 1)
+            cv2.circle(img, data, 3, color,-1)
+        else:
+            (w, h), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 1)
+            cv2.rectangle(img, (x1, y1), (x2, y2),(255,191,0), 2)
+            cv2.rectangle(img, (x1, y1 - 20), (x1 + w, y1), (255,191,0), -1)
+            cv2.putText(img, label, (x1, y1 - 5),cv2.FONT_HERSHEY_SIMPLEX, 0.6, 
+            [255, 255, 255], 1)
+            cv2.circle(img, data, 3, (255,191,0),-1)
     return img
 #..............................................................................
 
@@ -69,32 +91,16 @@ def draw_boxes(img, bbox, identities=None, categories=None, names=None, offset=(
 def detect(weights=ROOT / 'yolov5n.pt',
         source=ROOT / 'yolov5/data/images', 
         data=ROOT / 'yolov5/data/coco128.yaml',  
-        imgsz=(640, 640),
-        conf_thres=0.25,
-        iou_thres=0.45,  
-        max_det=1000,  
-        device='cpu',  
-        view_img=False,  
-        save_txt=False, 
-        save_conf=False, 
-        save_crop=False, 
-        nosave=False,  
-        classes=None,  
-        agnostic_nms=False,  
-        augment=False,  
-        visualize=False,  
-        update=False,  
-        project=ROOT / 'runs/detect',  
-        name='exp',  
-        exist_ok=False,  
-        line_thickness=2,  
-        hide_labels=False,  
-        hide_conf=False,  
-        half=False, 
-        dnn=False,
-        display_labels=False,
-        blur_obj=False,
-        ):
+        imgsz=(640, 640),conf_thres=0.25,iou_thres=0.45,  
+        max_det=1000, device='cpu',  view_img=False,  
+        save_txt=False, save_conf=False, save_crop=False, 
+        nosave=False, classes=None,  agnostic_nms=False,  
+        augment=False, visualize=False,  update=False,  
+        project=ROOT / 'runs/detect',  name='exp',  
+        exist_ok=False, line_thickness=2,hide_labels=False,  
+        hide_conf=False,half=False,dnn=False,display_labels=False,
+        blur_obj=False,color_box = False,):
+    
     save_img = not nosave and not source.endswith('.txt') 
     
     #.... Initialize SORT .... 
@@ -104,6 +110,7 @@ def detect(weights=ROOT / 'yolov5n.pt',
     sort_tracker = Sort(max_age=sort_max_age,
                        min_hits=sort_min_hits,
                        iou_threshold=sort_iou_thresh) 
+    track_color_id = 0
     #......................... 
     
     
@@ -204,20 +211,29 @@ def detect(weights=ROOT / 'yolov5n.pt',
                 tracked_dets = sort_tracker.update(dets_to_sort)
                 tracks =sort_tracker.getTrackers()
                 
+
                 #loop over tracks
                 for track in tracks:
-                    #draw tracks
-                    [cv2.line(im0, (int(track.centroidarr[i][0]),int(track.centroidarr[i][1])), 
-                            (int(track.centroidarr[i+1][0]),int(track.centroidarr[i+1][1])),
-                            (124, 252, 0), thickness=3) for i,_ in  enumerate(track.centroidarr) 
-                            if i < len(track.centroidarr)-1 ] 
+                    if color_box:
+                        color = compute_color_for_labels(track_color_id)
+                        [cv2.line(im0, (int(track.centroidarr[i][0]),int(track.centroidarr[i][1])), 
+                                (int(track.centroidarr[i+1][0]),int(track.centroidarr[i+1][1])),
+                                color, thickness=3) for i,_ in  enumerate(track.centroidarr) 
+                                if i < len(track.centroidarr)-1 ] 
+                        track_color_id = track_color_id+1
+                    else:
+                        [cv2.line(im0, (int(track.centroidarr[i][0]),int(track.centroidarr[i][1])), 
+                                (int(track.centroidarr[i+1][0]),int(track.centroidarr[i+1][1])),
+                                (124, 252, 0), thickness=3) for i,_ in  enumerate(track.centroidarr) 
+                                if i < len(track.centroidarr)-1 ] 
                 
                 # draw boxes for visualization
                 if len(tracked_dets)>0:
                     bbox_xyxy = tracked_dets[:,:4]
                     identities = tracked_dets[:, 8]
                     categories = tracked_dets[:, 4]
-                    draw_boxes(im0, bbox_xyxy, identities, categories, names)
+                    draw_boxes(im0, bbox_xyxy, identities, categories, names,color_box)
+                        
                 
                 
 
@@ -282,6 +298,7 @@ def parse_opt():
     parser.add_argument('--half', action='store_true', help='use FP16 half-precision inference')
     parser.add_argument('--dnn', action='store_true', help='use OpenCV DNN for ONNX inference')
     parser.add_argument('--blur-obj', action='store_true', help='Blur Detected Objects')
+    parser.add_argument('--color-box', action='store_true', help='Change color of every box and track')
     opt = parser.parse_args()
     opt.imgsz *= 2 if len(opt.imgsz) == 1 else 1  # expand
     print_args(vars(opt))
