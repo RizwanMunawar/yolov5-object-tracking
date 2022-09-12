@@ -62,6 +62,9 @@ python obj_det_and_trk.py --weights yolov5s.pt --source "your video.mp4"
 #for object detection + object tracking + object blurring
 python obj_det_and_trk.py --weights yolov5s.pt --source "your video.mp4" --blur-obj
 
+#for object detection + object tracking + object blurring + different color for every bounding box
+python obj_det_and_trk.py --weights yolov5s.pt --source "your video.mp4" --blur-obj --color-box
+
 #for object detection + object tracking of specific class (person)
 python obj_det_and_trk.py --weights yolov5s.pt --source "your video.mp4" --classes 0
 ```
