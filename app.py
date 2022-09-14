@@ -13,6 +13,7 @@ hide_menu_style = """
             border-radius:5px;
             text-align:center;
             color:black;
+            background:dodgerblue;
             font-weight:bold;
             padding: 25px;
             
@@ -21,6 +22,7 @@ hide_menu_style = """
         div[data-testid="stHorizontalBlock"]> div:nth-child(2)
         {   
             border : 2px solid #doe0db;
+            background:dodgerblue;
             border-radius:5px;
             text-align:center;
             font-weight:bold;
@@ -36,7 +38,7 @@ main_title = """
                 <h1 style="color:black;
                 text-align:center; font-size:35px;
                 margin-top:-95px;">
-                Web Page</h1>
+                YOLOv5 People Detection and Tracking</h1>
             </div>
             """
     
