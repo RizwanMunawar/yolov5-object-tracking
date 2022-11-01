@@ -72,7 +72,8 @@ def main():
     st.sidebar.title("USER Configuration")
     
 
-    input_source = 'Video'
+    input_source = st.sidebar.radio("Source",
+                                         ('Video', 'WebCam'))
 
     conf_thres = st.sidebar.text_input("Class confidence threshold", 
                                        "0.25")
@@ -131,7 +132,46 @@ def main():
                     display_labels=display_labels)
 
             inference_msg.success("Inference Complete!")
+
+
+
+    # ------------------------- LOCAL VIDEO ------------------------
+    if input_source == "WebCam":
+        
+        if st.sidebar.button("Start Tracking"):
+            
+            stframe = st.empty()
+            
+            st.markdown("""<h4 style="color:black;">
+                            Memory Overall Statistics</h4>""", 
+                            unsafe_allow_html=True)
+            kpi5, kpi6 = st.columns(2)
+
+            with kpi5:
+                st.markdown("""<h5 style="color:black;">
+                            CPU Utilization</h5>""", 
+                            unsafe_allow_html=True)
+                kpi5_text = st.markdown("0")
+            
+            with kpi6:
+                st.markdown("""<h5 style="color:black;">
+                            Memory Usage</h5>""", 
+                            unsafe_allow_html=True)
+                kpi6_text = st.markdown("0")
+            
+            detect(weights=weights, 
+                   source="0",  
+                   stframe=stframe, 
+                   kpi5_text=kpi5_text,
+                   kpi6_text = kpi6_text,
+                   conf_thres=float(conf_thres),
+                   device="cpu",
+                    classes=0,nosave=nosave, 
+                    display_labels=display_labels)
+
+            inference_msg.success("Inference Complete!")
            
+    # --------------------------------------------------------------       
     torch.cuda.empty_cache()
     # --------------------------------------------------------------
 
