@@ -15,17 +15,17 @@
 - Python 3.9 (Python 3.7/3.8 can work in some cases)
 
 ### Steps to run Code
-- Clone the repository
+1 - Clone the repository
 ```
 git clone https://github.com/RizwanMunawar/yolov5-object-tracking.git
 ```
 
-- Goto the cloned folder.
+2 - Goto the cloned folder.
 ```
 cd yolov5-object-tracking
 ```
 
-- Create a virtual envirnoment (Recommended, If you dont want to disturb python packages)
+3 - Create a virtual envirnoment (Recommended, If you dont want to disturb python packages)
 ```
 ### For Linux Users
 python3 -m venv yolov5objtracking
@@ -40,17 +40,17 @@ cd ..
 cd ..
 ```
 
-- Upgrade pip with mentioned command below.
+4 - Upgrade pip with mentioned command below.
 ```
 pip install --upgrade pip
 ```
 
-- Install requirements with mentioned command below.
+5 - Install requirements with mentioned command below.
 ```
 pip install -r requirements.txt
 ```
 
-- Run the code with mentioned command below.
+6 - Run the code with mentioned command below.
 ```
 #for detection only
 python ob_detect.py --weights yolov5s.pt --source "your video.mp4"
@@ -71,7 +71,7 @@ python obj_det_and_trk.py --weights yolov5s.pt --source "your video.mp4" --blur-
 python obj_det_and_trk.py --weights yolov5s.pt --source "your video.mp4" --classes 0
 ```
 
-- Output file will be created in the working-dir/runs/detect/exp with original filename
+7 - Output file will be created in the working-dir/runs/detect/exp with original filename
 
 ### Streamlit Dashboard
 - If you want to run detection on streamlit app (Dashboard), you can use mentioned command below.
