@@ -101,12 +101,12 @@ python -m streamlit run app.py
  - https://github.com/abewley/sort
  
 ### My Medium Articles
-- https://medium.com/augmented-startups/yolov7-training-on-custom-data-b86d23e6623
-- https://medium.com/augmented-startups/roadmap-for-computer-vision-engineer-45167b94518c
-- https://medium.com/augmented-startups/yolor-or-yolov5-which-one-is-better-2f844d35e1a1
-- https://medium.com/augmented-startups/train-yolor-on-custom-data-f129391bd3d6
-- https://medium.com/augmented-startups/develop-an-analytics-dashboard-using-streamlit-e6282fa5e0f
-- https://medium.com/augmented-startups/jetson-nano-is-rapidly-involving-in-computer-vision-solutions-5f588cb7c0db
-- https://chr043416.medium.com/how-can-computer-vision-products-help-in-warehouses-aa1dd95ec79c
+1. [YOLOv7 Training on Custom Data](https://medium.com/augmented-startups/yolov7-training-on-custom-data-b86d23e6623) – Guide to training YOLOv7 on custom datasets.
+2. [Roadmap for Computer Vision Engineer](https://medium.com/augmented-startups/roadmap-for-computer-vision-engineer-45167b94518c) – A step-by-step career guide for aspiring computer vision engineers.
+3. [YOLOR or YOLOv5: Which One is Better?](https://medium.com/augmented-startups/yolor-or-yolov5-which-one-is-better-2f844d35e1a1) – Comparative analysis of YOLOR vs. YOLOv5 for model selection.
+4. [Train YOLOR on Custom Data](https://medium.com/augmented-startups/train-yolor-on-custom-data-f129391bd3d6) – Instructions for customizing YOLOR on unique datasets.
+5. [Develop an Analytics Dashboard Using Streamlit](https://medium.com/augmented-startups/develop-an-analytics-dashboard-using-streamlit-e6282fa5e0f) – Tutorial on building data dashboards with Streamlit.
+6. [Jetson Nano in Computer Vision Solutions](https://medium.com/augmented-startups/jetson-nano-is-rapidly-involving-in-computer-vision-solutions-5f588cb7c0db) – Insight on Jetson Nano's role in embedded AI projects.
+7. [How Computer Vision Products Help in Warehouses](https://chr043416.medium.com/how-can-computer-vision-products-help-in-warehouses-aa1dd95ec79c) – Overview of computer vision applications in warehouse efficiency.
 
 For more details, you can reach out to me on [Medium](https://chr043416.medium.com/) or can connect with me on [LinkedIn](https://www.linkedin.com/in/muhammadrizwanmunawar/)
