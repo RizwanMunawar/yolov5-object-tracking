@@ -7,10 +7,6 @@
 - Code can run on Both (CPU & GPU)
 - Video/WebCam/External Camera/IP Stream Supported
 
-### Coming Soon
-- Option to crop and save detected objects
-- Dashboard design enhancement
-
 ### Pre-Requsities
 - Python 3.9 (Python 3.7/3.8 can work in some cases)
 
