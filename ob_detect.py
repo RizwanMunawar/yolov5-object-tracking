@@ -55,6 +55,12 @@ def run(
         vid_stride=1,  # video frame-rate stride
 ):
     source = str(source)
+    if not os.path.exists(source):
+        from utils.downloads import safe_download
+        print(f"warning!!! {source} not exist, downloading test.mp4 from assets!!!")
+        safe_download(url="https://github.com/RizwanMunawar/yolov5-object-tracking/releases/download/yolov5-obj-tracking-v1.0.1/test.mp4",
+                      file="test.mp4")
+        source = "test.mp4"
     save_img = not nosave and not source.endswith('.txt')  # save inference images
     is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FORMATS)
     is_url = source.lower().startswith(('rtsp://', 'rtmp://', 'http://', 'https://'))
