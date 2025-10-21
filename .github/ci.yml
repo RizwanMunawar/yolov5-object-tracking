@@ -1,0 +1,41 @@
+name: CI  # Continuous Integration Setup
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Verify model file
+        run: |
+          if [ ! -f "yolov5s.pt" ]; then
+            echo "Downloading YOLOv5s model..."
+            curl -L -o yolov5s.pt https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5s.pt
+          fi
+
+      - name: Run YOLOv5 detection sample
+        run: |
+          python ob_detect.py --weights yolov5s.pt --source "https://www.youtube.com/shorts/A5DPAWE7pZI"
